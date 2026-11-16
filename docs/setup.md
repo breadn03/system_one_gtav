@@ -29,7 +29,7 @@ The dependencies and weights already exist in the development checkout. Reuse it
 
 In a second terminal, `Invoke-RestMethod http://127.0.0.1:8765/health` returns `loading`, `ready` or `failed`. `ready` means weights loaded, not that tactics are accurate. Logs contain initialization failures. Ctrl+C stops the service; valid game orders remain in effect until replaced or the pursuit ends.
 
-`PURSUIT_MANIFEST` can point to an alternate local manifest. Keep package and model revisions pinned. Multilingual supports the configured 8192 limit; actual snapshots are much shorter. The typed-decisions comparison uses `subfolder="typed-decisions"`, `max_len=1024`, `head_max_len=512`. That checkpoint has less capacity for large team plans. A response whose inputs/options exceed budgets is rejected rather than silently truncated.
+`PURSUIT_MANIFEST` can point to an alternate local manifest. Keep package and model revisions pinned. The default is `subfolder="multilingual"`, `max_len=8192`, `head_max_len=1024`. The typed-decisions comparison uses `max_len=1024`, `head_max_len=512` and has less capacity for large team plans. A response whose inputs/options exceed budgets is rejected rather than silently truncated.
 
 ## Build from source
 
