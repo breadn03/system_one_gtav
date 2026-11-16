@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework><LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget><AssemblyName>Pursuit.Legacy</AssemblyName>
+    <ShvdnDirectory Condition="'$(ShvdnDirectory)' == ''">$(MSBuildThisFileDirectory)..\..\artifacts\sdk\shvdn</ShvdnDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Pursuit.Core/Pursuit.Core.csproj" />
+    <Reference Include="ScriptHookVDotNet3"><HintPath>$(ShvdnDirectory)\ScriptHookVDotNet3.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Net.Http" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <Target Name="CheckSdk" BeforeTargets="ResolveReferences" Condition="!Exists('$(ShvdnDirectory)\ScriptHookVDotNet3.dll')">
+    <Error Text="Missing matched SHVDN v3 API. See docs/setup.md or set ShvdnDirectory." />
+  </Target>
+</Project>

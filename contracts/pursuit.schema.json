@@ -1,0 +1,284 @@
+{
+  "$defs": {
+    "Assignment": {
+      "additionalProperties": false,
+      "properties": {
+        "unit_id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "lead",
+            "support",
+            "intercept",
+            "contain"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "destination_node_id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Destination Node Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit_id",
+        "role",
+        "destination_node_id"
+      ],
+      "title": "Assignment",
+      "type": "object"
+    },
+    "CandidatePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "assignments": {
+          "items": {
+            "$ref": "#/$defs/Assignment"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "Assignments",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "assignments"
+      ],
+      "title": "CandidatePlan",
+      "type": "object"
+    },
+    "KnownSuspect": {
+      "additionalProperties": false,
+      "properties": {
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "heading": {
+          "title": "Heading",
+          "type": "number"
+        },
+        "speed": {
+          "minimum": 0,
+          "title": "Speed",
+          "type": "number"
+        },
+        "observed_ms": {
+          "minimum": 0,
+          "title": "Observed Ms",
+          "type": "integer"
+        },
+        "vehicle_description": {
+          "maxLength": 256,
+          "title": "Vehicle Description",
+          "type": "string"
+        },
+        "observer_id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Observer Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "position",
+        "heading",
+        "speed",
+        "observed_ms",
+        "vehicle_description",
+        "observer_id"
+      ],
+      "title": "KnownSuspect",
+      "type": "object"
+    },
+    "Point": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "z": {
+          "title": "Z",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "title": "Point",
+      "type": "object"
+    },
+    "RoadCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "reachable_unit_ids": {
+          "items": {
+            "maxLength": 96,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 128,
+          "title": "Reachable Unit Ids",
+          "type": "array"
+        },
+        "description": {
+          "maxLength": 256,
+          "title": "Description",
+          "type": "string"
+        },
+        "suspect_route_verified": {
+          "title": "Suspect Route Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "position",
+        "reachable_unit_ids",
+        "description",
+        "suspect_route_verified"
+      ],
+      "title": "RoadCandidate",
+      "type": "object"
+    },
+    "UnitState": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 96,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/Point"
+        },
+        "available": {
+          "const": true,
+          "title": "Available",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "position",
+        "available"
+      ],
+      "title": "UnitState",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "session_id": {
+      "maxLength": 96,
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 0,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "captured_ms": {
+      "minimum": 0,
+      "title": "Captured Ms",
+      "type": "integer"
+    },
+    "wanted_level": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Wanted Level",
+      "type": "integer"
+    },
+    "known_suspect": {
+      "$ref": "#/$defs/KnownSuspect"
+    },
+    "visual_contact": {
+      "title": "Visual Contact",
+      "type": "boolean"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/UnitState"
+      },
+      "maxItems": 128,
+      "minItems": 1,
+      "title": "Units",
+      "type": "array"
+    },
+    "roads": {
+      "items": {
+        "$ref": "#/$defs/RoadCandidate"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Roads",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/CandidatePlan"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "title": "Candidates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "session_id",
+    "revision",
+    "captured_ms",
+    "wanted_level",
+    "known_suspect",
+    "visual_contact",
+    "units",
+    "roads",
+    "candidates"
+  ],
+  "title": "Snapshot",
+  "type": "object"
+}

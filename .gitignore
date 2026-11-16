@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+bin/
+obj/
+artifacts/
+.superpowers/
+models/
+.cache/
+*.local.json
+*.local.ini
+*.egg-info/
+.vs/
+.worktrees/

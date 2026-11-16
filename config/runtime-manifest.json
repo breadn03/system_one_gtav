@@ -1,0 +1,13 @@
+{
+  "game": {"edition": "Legacy", "executable_version": "1.0.3889.0", "in_game_verified": false},
+  "scripthook_v": {"version": "v3889.0 / 1158.13", "installed_by_project": false},
+  "shvdn": {"release": "v3.7.0-nightly.206", "api": "ScriptHookVDotNet3.dll", "sha256": "B25A8BF04AE5D73332248C5F42C54F8B542FA841C584EC1272C343CA3831F41F", "installed_by_project": false},
+  "python": "3.11",
+  "laya": "0.4.34",
+  "torch": "2.9.1+cu128",
+  "model": {"repository": "convaiinnovations/laya", "revision": "e333cb7c823cd1787276228260f56d02fbf5180b", "subfolder": "multilingual", "max_len": 8192, "head_max_len": 1024},
+  "device": "cuda",
+  "gpu": "RTX 3080 10240 MiB",
+  "driver": "621.24",
+  "tactical_quality": "synthetic_multilingual_12_of_24; not_validated_in_game; observation_mode_default"
+}
